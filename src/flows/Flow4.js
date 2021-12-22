@@ -71,7 +71,7 @@ const DnDFlow = () => {
 
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
     const type = event.dataTransfer.getData('application/reactflow');
-    const label = (event.dataTransfer.getData('label') != '') ? event.dataTransfer.getData('label') : type;
+    const label = (event.dataTransfer.getData('label') !== '') ? event.dataTransfer.getData('label') : type;
     const position = reactFlowInstance.project({
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,

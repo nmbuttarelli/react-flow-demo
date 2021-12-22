@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
-  ArrowHeadType,
-  Edge,
   addEdge,
   removeElements,
   updateEdge,

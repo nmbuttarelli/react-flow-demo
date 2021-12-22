@@ -26,8 +26,10 @@ const elements = [
   { id: 'e2-3', source: '2', target: '3' },
 ];
 
-export default () => (
+const Flow1 = () => (
   <div style={{ height: 500, 'margin-left': 200}}>
     <ReactFlow elements={elements} />
   </div>
 );
+
+export default Flow1;

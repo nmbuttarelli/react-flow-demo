@@ -2,8 +2,6 @@ import React, { memo } from 'react';
 
 import { Handle, Position } from 'react-flow-renderer';
 
-const nodeStyles = { padding: '10px 15px', border: '1px solid #ddd' };
-
 const FullNode = ({ data }) => {
   return (
     <>

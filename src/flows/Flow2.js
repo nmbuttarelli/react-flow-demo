@@ -15,7 +15,7 @@ const initialElements = [
   },
 ];
 
-export default () => {
+const Flow2 = () => {
   const [elements, setElements] = useState(initialElements);
   const onElementsRemove = (elementsToRemove) =>
     setElements((els) => removeElements(elementsToRemove, els));
@@ -32,3 +32,5 @@ export default () => {
     </div>
   );
 };
+
+export default Flow2;

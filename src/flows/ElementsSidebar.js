@@ -16,7 +16,7 @@ const edgeTypes = [
   { value: 'smoothstep', label: 'Smooth Step' }
 ]
 
-const onDragStart = (event: DragEvent, nodeType: string, label:string = '') => {
+const onDragStart = (event, nodeType, label = '') => {
   event.dataTransfer.setData('application/reactflow', nodeType);
   event.dataTransfer.setData("label", label);
   event.dataTransfer.effectAllowed = 'move';

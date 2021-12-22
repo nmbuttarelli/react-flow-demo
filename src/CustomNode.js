@@ -4,11 +4,11 @@ import { Handle, Position } from 'react-flow-renderer';
 
 const nodeStyles = { padding: '10px 15px', border: '1px solid #ddd' };
 
-const targetHandleStyle: CSSProperties = { background: '#555' };
-const verticalSourceHandleStyle: CSSProperties = { ...targetHandleStyle, top: 10 };
-const verticalTargetHandleStyle: CSSProperties = { ...targetHandleStyle, bottom: 10, top: 'auto', borderRadius: 0 };
-const horizontalSourceHandleStyle: CSSProperties = { ...targetHandleStyle, left: 50 };
-const horizontalTargetHandleStyle: CSSProperties = { ...targetHandleStyle, left: 120, borderRadius: 0 };
+const targetHandleStyle = { background: '#555' };
+const verticalSourceHandleStyle = { ...targetHandleStyle, top: 10 };
+const verticalTargetHandleStyle = { ...targetHandleStyle, bottom: 10, top: 'auto', borderRadius: 0 };
+const horizontalSourceHandleStyle = { ...targetHandleStyle, left: 50 };
+const horizontalTargetHandleStyle = { ...targetHandleStyle, left: 120, borderRadius: 0 };
 
 const CustomNode = ({ id }) => {
   return (

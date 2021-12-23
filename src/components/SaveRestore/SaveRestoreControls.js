@@ -1,5 +1,5 @@
-import React, { memo, useCallback, Dispatch, FC } from 'react';
-import { useZoomPanHelper, OnLoadParams, Elements, FlowExportObject } from 'react-flow-renderer';
+import React, { memo, useCallback } from 'react';
+import { useZoomPanHelper } from 'react-flow-renderer';
 import localforage from 'localforage';
 import './SaveRestore.css';
 
@@ -9,8 +9,6 @@ localforage.config({
 });
 
 const flowKey = 'all-in-one-flow';
-
-const getNodeId = () => `randomnode_${+new Date()}`;
 
 const Controls = ({ rfInstance, setElements }) => {
   const { transform } = useZoomPanHelper();

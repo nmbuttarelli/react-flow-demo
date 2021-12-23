@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import ReactFlow, { removeElements, addEdge } from 'react-flow-renderer';
 
-import FullNode from '../customNodes/FullNode'
-
-const nodeTypes = {
-  full: FullNode,
-}
-
 const initialElements = [
   {
     id: '1',

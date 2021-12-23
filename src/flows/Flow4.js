@@ -1,17 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
   removeElements,
   updateEdge,
-  Controls,
+  Controls
 } from 'react-flow-renderer';
-
-import ElementsSidebar from './ElementsSidebar';
+import './App.css';
+import ElementsSidebar from '../components/ElementsSidebar';
 import FullNode from '../customNodes/FullNode'
 import HorizontalNode from '../customNodes/HorizontalNode';
-
-import './dnd.css';
+import HorizontalInputNode from '../customNodes/HorizontalInputNode';
+import HorizontalOutputNode from '../customNodes/HorizontalOutputNode';
+import SaveRestoreControls from '../components/SaveRestore/SaveRestoreControls';
 
 const initialElements = [];
 
@@ -22,17 +23,28 @@ const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
-  const [selectedEdgeType, setSelectedEdgeType] = useState({ value: 'step', label: 'Step'})
-  const [selectedArrowType, setSelectedArrowType] = useState({ value: 'arrowclosed', label: 'Arrow Closed'})
+  const [selectedEdgeType, setSelectedEdgeType] = useState({ value: 'step', label: 'Step' })
+  const [selectedArrowType, setSelectedArrowType] = useState({ value: 'arrowclosed', label: 'Arrow Closed' })
+  const [animateArrow, setAnimeteArrowChecked] = React.useState(false);
+  const [arrowLabel, setArrowLabel] = useState('');
+  const [selectedNode, setSelectedNode] = useState(null);
+  const [nodeName, setNodeName] = useState('');
+  const [nodeBg, setNodeBg] = useState('#eee');
+
+  const handleArrowLabelChange = (e) => {
+    setArrowLabel(e.target.value)
+  }
+
+  const handleAnimateArrowCheckboxChange = () => {
+    setAnimeteArrowChecked(!animateArrow);
+  }
 
   const handleEdgeTypeChange = (selectedOption) => {
     setSelectedEdgeType(selectedOption);
-    console.log(`Option selected:`, selectedOption);
   }
 
   const handleArrowTypeChange = (selectedOption) => {
     setSelectedArrowType(selectedOption);
-    console.log(`Option selected:`, selectedOption);
   }
 
   const onEdgeUpdate = (oldEdge, newConnection) =>
@@ -42,17 +54,18 @@ const DnDFlow = () => {
     const edge = {
       ...params,
       type: selectedEdgeType.value,
-      arrowHeadType: selectedArrowType.value
+      arrowHeadType: selectedArrowType.value,
+      animated: animateArrow,
+      label: arrowLabel
     };
+
     return addEdge(edge, els);
   });
-
 
   const onElementsRemove = (elementsToRemove) =>
     setElements((els) => removeElements(elementsToRemove, els));
 
-  const onLoad = (_reactFlowInstance) =>
-    setReactFlowInstance(_reactFlowInstance);
+  const onLoad = (_reactFlowInstance) => setReactFlowInstance(_reactFlowInstance);
 
   const onDragOver = (event) => {
     event.preventDefault();
@@ -61,7 +74,9 @@ const DnDFlow = () => {
 
   const nodeTypes = {
     full: FullNode,
-    horizontal: HorizontalNode
+    horizontal: HorizontalNode,
+    'horizontal-input': HorizontalInputNode,
+    'horizontal-output': HorizontalOutputNode
   };
 
   const onDrop = (event) => {
@@ -85,27 +100,68 @@ const DnDFlow = () => {
     setElements((es) => es.concat(newNode));
   };
 
+  useEffect(() => {
+    setElements((els) => els.map((el) => {
+      if (el.id === selectedNode.id) {
+        el.data = { ...el.data, label: nodeName };
+      }
+      return el;
+    }));
+  }, [nodeName, setElements]);
+
+  useEffect(() => {
+    setElements((els) => els.map((el) => {
+      if (el.id === selectedNode.id) {
+        el.style = { ...el.style, backgroundColor: nodeBg };
+      }
+      return el;
+    }));
+  }, [nodeBg, setElements]);
+
   return (
-    <div className="dndflow">
-      <ReactFlowProvider>
-        <ElementsSidebar handleEdgeTypeChange={handleEdgeTypeChange} handleArrowTypeChange={handleArrowTypeChange} selectedEdgeType={selectedEdgeType} selectedArrowType={selectedArrowType} />
-        <div className="reactflow-wrapper" ref={reactFlowWrapper}>
-          <ReactFlow
-            elements={elements}
-            nodeTypes={nodeTypes}
-            connectionMode='loose'
-            onConnect={onConnect}
-            onElementsRemove={onElementsRemove}
-            onLoad={onLoad}
-            onDrop={onDrop}
-            onDragOver={onDragOver}
-            onEdgeUpdate={onEdgeUpdate}
-          >
-            <Controls style={{ right: '50px', bottom: 'auto', left: 'auto' }} />
-          </ReactFlow>
-        </div>
-      </ReactFlowProvider>
-    </div>
+    <>
+      <div className='head'>
+        <h1> Flow 4 </h1><br />
+        <h3>More Node Types and with functional panels</h3>
+      </div>
+      <div className="dndflow">
+        <ReactFlowProvider>
+          <ElementsSidebar
+            handleEdgeTypeChange={handleEdgeTypeChange}
+            handleArrowTypeChange={handleArrowTypeChange}
+            selectedEdgeType={selectedEdgeType}
+            selectedArrowType={selectedArrowType}
+            handleAnimateArrowCheckboxChange={handleAnimateArrowCheckboxChange}
+            animateArrow={animateArrow}
+            handleArrowLabelChange={handleArrowLabelChange}
+            nodeName={nodeName} setNodeName={setNodeName}
+            nodeBg={nodeBg} setNodeBg={setNodeBg}
+          />
+          <div className="reactflow-wrapper" ref={reactFlowWrapper}>
+            <ReactFlow
+              elements={elements}
+              nodeTypes={nodeTypes}
+              connectionMode='loose'
+              onConnect={onConnect}
+              onElementsRemove={onElementsRemove}
+              onLoad={onLoad}
+              onDrop={onDrop}
+              onDragOver={onDragOver}
+              onEdgeUpdate={onEdgeUpdate}
+              onSelectionChange={(selectedElements) => {
+                const node = selectedElements ? selectedElements[0] : null
+                if (node && node.data && node.data.label)
+                  setNodeName(node.data.label)
+                setSelectedNode(node)
+              }}
+            >
+              <Controls style={{ right: '10px', bottom: 'auto', left: 'auto' }} />
+              <SaveRestoreControls rfInstance={reactFlowInstance} setElements={setElements} />
+            </ReactFlow>
+          </div>
+        </ReactFlowProvider>
+      </div>
+    </>
   );
 };
 

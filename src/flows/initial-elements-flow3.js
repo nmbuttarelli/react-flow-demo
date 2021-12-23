@@ -7,7 +7,7 @@ const initialElements =  [
     data: {
       label: (
         <>
-          Welcome to <strong>React Flow!</strong>
+          Lets try <strong>React Flow!</strong>
         </>
       ),
     },
@@ -18,28 +18,30 @@ const initialElements =  [
     data: {
       label: (
         <>
-          This is a <strong>default node</strong>
+          Just a <strong>normal node</strong> with styles
         </>
       ),
     },
     position: { x: 100, y: 100 },
-  },
-  {
-    id: '3',
-    data: {
-      label: (
-        <>
-          This one has a <strong>custom style</strong>
-        </>
-      ),
-    },
-    position: { x: 400, y: 100 },
     style: {
       background: '#D6D5E6',
       color: '#333',
       border: '1px solid #222138',
       width: 180,
     },
+  },
+  {
+    id: '3',
+    type: 'full',
+    data: {
+      label: (
+        <>
+          Multidirectional NODE
+        </>
+      ),
+    },
+    position: { x: 400, y: 100 },
+
   },
   {
     id: '4',
@@ -56,45 +58,28 @@ const initialElements =  [
     position: { x: 250, y: 325 },
   },
   {
-    id: '6',
-    type: 'output',
-    data: {
-      label: (
-        <>
-          An <strong>output node</strong>
-        </>
-      ),
-    },
-    position: { x: 100, y: 480 },
-  },
-  {
     id: '7',
     type: 'output',
     data: { label: 'Another output node' },
     position: { x: 400, y: 450 },
   },
-  { id: 'e1-2', source: '1', target: '2', label: 'this is an edge label' },
-  { id: 'e1-3', source: '1', target: '3' },
+  { id: 'e1-2', source: '1', target: '2' },
+  { id: 'e1-3', source: '1', target: '3', label: 'edge with label' },
   {
     id: 'e3-4',
-    source: '3',
+    source: '2',
     target: '4',
-    animated: true,
-    label: 'animated edge',
+
+    arrowHeadType: 'arrow',
+    label: 'animated with arrow',
   },
   {
     id: 'e4-5',
     source: '4',
     target: '5',
+    animated: true,
     arrowHeadType: 'arrowclosed',
     label: 'edge with arrow head',
-  },
-  {
-    id: 'e5-6',
-    source: '5',
-    target: '6',
-    type: 'smoothstep',
-    label: 'smooth step edge',
   },
   {
     id: 'e5-7',

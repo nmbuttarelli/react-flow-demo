@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import Home from './flows/Home'
 import Flow1 from './flows/Flow1'
 import Flow2 from './flows/Flow2'

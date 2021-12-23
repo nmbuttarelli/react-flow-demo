@@ -1,0 +1,116 @@
+.head {
+  text-align: center;
+}
+.react-flow__controls-button {
+  display: inline !important;
+}
+
+.dndflow {
+  flex-direction: column;
+  display: flex;
+  height: 900px;
+}
+
+.dndflow aside {
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #fcfcfc;
+}
+
+.dndflow aside>* {
+  margin-bottom: 10px;
+  cursor: grab;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+
+.dndflow .reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.react-flow__node-horizontal,
+.react-flow__node-horizontal-input,
+.react-flow__node-horizontal-output,
+.react-flow__node-full {
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  color: #222;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.react-flow__node-horizontal {
+  background: #fff;
+  border-color: #00e1ff;
+}
+
+.react-flow__node-horizontal.selected, .react-flow__node-horizontal.selected:hover {
+  box-shadow: 0 0 0 0.5px #00e1ff;
+}
+
+.react-flow__node-horizontal-input {
+  background: #fff;
+  border-color: #6b6d6d;
+}
+
+.react-flow__node-horizontal-input.selected, .react-flow__node-horizontal-input.selected:hover {
+  box-shadow: 0 0 0 0.5px #6b6d6d;
+}
+
+.react-flow__node-horizontal-output {
+  background: #fff;
+  border-color: #bdd343;
+}
+
+.react-flow__node-horizontal-output, .react-flow__node-horizontal-output.selected:hover {
+  box-shadow: 0 0 0 0.5px #bdd343;
+}
+
+.react-flow__node-full {
+  background: #fff;
+  border-color: #0abd22;
+}
+
+.react-flow__node-full.selected, .react-flow__node-full.full:hover {
+  box-shadow: 0 0 0 0.5px #0abd22;
+}
+
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 180px;
+  }
+}
+
+.updatenode__controls {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  z-index: 4;
+  font-size: 12px;
+}
+
+.updatenode__controls label {
+  display: block;
+}
+
+.updatenode__bglabel {
+  margin-top: 10px;
+}
+
+.updatenode__checkboxwrapper {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}

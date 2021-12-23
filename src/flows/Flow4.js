@@ -106,7 +106,7 @@ const DnDFlow = () => {
         el.data = { ...el.data, label: nodeName };
       }
       return el;
-    }));
+    })); // eslint-disable-next-line
   }, [nodeName, setElements]);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const DnDFlow = () => {
         el.style = { ...el.style, backgroundColor: nodeBg };
       }
       return el;
-    }));
+    })); // eslint-disable-next-line
   }, [nodeBg, setElements]);
 
   return (

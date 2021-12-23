@@ -9,27 +9,27 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Flow 1',
+        title: 'Simple Flow - No functions',
         path: '/flow1',
-        icon: <AiIcons.AiFillHome />,
+        icon: <AiIcons.AiOutlineNodeIndex />,
         cName: 'nav-text'
     },
     {
-        title: 'Flow 2',
+        title: 'Flow with edge additions',
         path: '/flow2',
-        icon: <AiIcons.AiFillHome />,
+        icon: <AiIcons.AiOutlineShrink />,
         cName: 'nav-text'
     },
     {
-        title: 'Flow 3',
+        title: 'Flow with full-connected node',
         path: '/flow3',
-        icon: <AiIcons.AiFillHome />,
+        icon: <AiIcons.AiOutlineShareAlt />,
         cName: 'nav-text'
     },
     {
-        title: 'Flow 4',
+        title: 'Empty Editable Flow',
         path: '/flow4',
-        icon: <AiIcons.AiFillHome />,
+        icon: <AiIcons.AiOutlineRadiusSetting />,
         cName: 'nav-text'
     },
 ]

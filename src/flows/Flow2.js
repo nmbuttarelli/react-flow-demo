@@ -30,10 +30,10 @@ const Flow2 = () => {
   return (
     <>
       <div className='head'>
-        <h1> Flow 2 </h1><br/>
-        <h3>Now can add edges! Select nodes and edges and delete them with backspace!</h3>
+        <h1>Flow with edge additions</h1><br/>
+        <h3>Now can add edges! Select nodes and edges and delete them with DELETE KEY!</h3>
       </div>
-      <div style={{ height: 500, 'margin-left': 200 }}>
+      <div style={{ height: 500, marginLeft: 200 }}>
         <ReactFlow
           elements={elements}
           onElementsRemove={onElementsRemove}

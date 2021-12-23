@@ -36,7 +36,7 @@ const elements = [
 const Flow1 = () => (
   <>
     <div className='head'>
-      <h1> Flow 1 </h1><br />
+      <h1>Simple Flow - No functions</h1><br />
       <h3>Simple and fixed Flow!</h3>
     </div>
     <div style={{ height: 500, 'margin-left': 200 }}>

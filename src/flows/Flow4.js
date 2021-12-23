@@ -121,7 +121,7 @@ const DnDFlow = () => {
   return (
     <>
       <div className='head'>
-        <h1> Flow 4 </h1><br />
+        <h1>Empty Editable Flow</h1><br />
         <h3>More Node Types and with functional panels</h3>
       </div>
       <div className="dndflow">

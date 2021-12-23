@@ -28,7 +28,7 @@ const OverviewFlow = () => {
   return (
     <>
       <div className='head'>
-        <h1> Flow 3 </h1><br />
+        <h1>Flow with full-connected node</h1><br />
         <h3>Same than Flow 2 but with Custom Multidirectional Node!</h3>
         <h3>Flow Controls Provided by React Flow added at the corner</h3>
       </div>

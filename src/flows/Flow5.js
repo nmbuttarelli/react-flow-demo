@@ -79,8 +79,8 @@ const VSMPlayground = () => {
 
   const onConnect = (params) => setElements((els) => {
     //to make the build work, delete after upgrading
-    setSelectedEdgeType(selectedEdgeType.value)
-    setSelectedArrowType(selectedArrowType.value)
+    setSelectedEdgeType({ value: 'step', label: 'Step' })
+    setSelectedArrowType({ value: 'arrowclosed', label: 'Arrow Closed' })
     setAnimeteArrow(false)
     setArrowLabel('')
     const edge = {

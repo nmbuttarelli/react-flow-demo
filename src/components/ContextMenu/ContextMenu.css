@@ -1,0 +1,96 @@
+.context-menu {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    z-index: 4;
+    font-size: 14px;
+  }
+
+  .context-menu button {
+    margin-left: 5px;
+  }
+
+  .vsm-playground-main {
+    background-color: aquamarine;
+  }
+
+  .vsm-playgroung-wrapper {
+    margin: 10px;
+  }
+
+  .react-flow__pane {
+
+  }
+
+  .menu, .node-menu, .panel-menu {
+    z-index: 5;
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px 0 5px 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    position: absolute;
+    list-style: none;
+    box-shadow: 0 0 20px 0 #ccc;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+    border: 1px solid rgb(0, 0, 0);
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .panel-menu .react-flow__node-horizontal,
+  .panel-menu .react-flow__node-horizontal-input,
+  .panel-menu .react-flow__node-horizontal-output,
+  .panel-menu .react-flow__node-full,
+  .panel-menu .react-flow__node-horizontal-clear-panel,
+  .panel-menu .react-flow__node-input,
+  .panel-menu .react-flow__node-output {
+    margin: 5px 0px;
+  }
+
+  ul.node-menu li {
+    display: inline;
+    text-align: center;
+    cursor: default;
+  }
+
+  ul.node-menu li.first:before { content: ""; }
+
+  ul.node-menu li:before { content: " | "; }
+
+  ul.node-menu li .delete-icon {
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  ul.node-menu li .shape-icon {
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+.round-color-picker {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    vertical-align: middle;
+    border: 1px solid rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.round-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.round-color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}

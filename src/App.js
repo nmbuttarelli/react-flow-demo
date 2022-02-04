@@ -7,19 +7,21 @@ import Flow1 from './flows/Flow1'
 import Flow2 from './flows/Flow2'
 import Flow3 from './flows/Flow3'
 import Flow4 from './flows/Flow4'
+import Flow5 from './flows/Flow5'
 
 function App() {
   return (
     <>
-      <Router>
+      <Router className="vsm-playground-main">
         <Navbar />
-        <Routes>
+        <Routes >
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/flow1' element={<Flow1 />} />
           <Route path='/flow2' element={<Flow2 />} />
           <Route path='/flow3' element={<Flow3 />} />
           <Route path='/flow4' element={<Flow4 />} />
+          <Route path='/flow5' element={<Flow5 />} />
         </Routes>
       </Router>
     </>

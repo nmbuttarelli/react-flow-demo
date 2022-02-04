@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
+  Edge,
   addEdge,
   removeElements,
   updateEdge,
@@ -13,6 +14,7 @@ import HorizontalNode from '../customNodes/HorizontalNode';
 import HorizontalInputNode from '../customNodes/HorizontalInputNode';
 import HorizontalOutputNode from '../customNodes/HorizontalOutputNode';
 import SaveRestoreControls from '../components/SaveRestore/SaveRestoreControls';
+import NodeMenu from "../components/ContextMenu/NodeMenu";
 
 const initialElements = [];
 
@@ -79,6 +81,33 @@ const DnDFlow = () => {
     'horizontal-output': HorizontalOutputNode
   };
 
+  const [showNodeContextMenu, setShowNodeContextMenu] = useState(false);
+  const [isContextSubmenuOpen, setIsContextSubmenuOpen] = useState(false);
+  const [contextMenuCurrentNode, setContextMenuCurrentNode] = useState();
+  const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
+
+  const handleClickOutsideContextMenu = useCallback(() => {
+    const keepContextMenuOnScreen = showNodeContextMenu && isContextSubmenuOpen
+    (keepContextMenuOnScreen ? setShowNodeContextMenu(false) : null)
+  }, [showNodeContextMenu]);
+
+  const onNodeContextMenu = (event, node) => {
+    event.preventDefault();
+    console.log('node context menu', node)
+    setShowNodeContextMenu(true)
+    setAnchorPoint({ x: event.pageX, y: event.pageY })
+    setContextMenuCurrentNode(node)
+  }
+  useEffect(() => {
+    //document.addEventListener("click", handleClickOutsideContextMenu);
+    return () => {
+      //document.removeEventListener("click", handleClickOutsideContextMenu);
+    };
+  });
+
+
+  const onEdgeContextMenu = (_, edge) => console.log('edge context menu', edge);
+
   const onDrop = (event) => {
     event.preventDefault();
 
@@ -94,29 +123,29 @@ const DnDFlow = () => {
       id: getId(),
       type,
       position,
-      data: { label: `${label} node` },
+      data: { label: `${label} node`, nodeName: nodeName, setNodeName: setNodeName},
     };
 
     setElements((es) => es.concat(newNode));
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     setElements((els) => els.map((el) => {
       if (el.id === selectedNode.id) {
         el.data = { ...el.data, label: nodeName };
       }
       return el;
     })); // eslint-disable-next-line
-  }, [nodeName, setElements]);
+  }, [nodeName, setElements]);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
     setElements((els) => els.map((el) => {
       if (el.id === selectedNode.id) {
         el.style = { ...el.style, backgroundColor: nodeBg };
       }
       return el;
     })); // eslint-disable-next-line
-  }, [nodeBg, setElements]);
+  }, [nodeBg, setElements]);*/
 
   return (
     <>
@@ -125,6 +154,12 @@ const DnDFlow = () => {
         <h3>More Node Types and with functional panels</h3>
       </div>
       <div className="dndflow">
+        <NodeMenu
+          show={showNodeContextMenu}
+          anchorPoint={anchorPoint}
+          node={contextMenuCurrentNode}
+          setElements={setElements}
+        />
         <ReactFlowProvider>
           <ElementsSidebar
             handleEdgeTypeChange={handleEdgeTypeChange}
@@ -154,6 +189,8 @@ const DnDFlow = () => {
                   setNodeName(node.data.label)
                 setSelectedNode(node)
               }}
+              onNodeContextMenu={onNodeContextMenu}
+              onEdgeContextMenu={onEdgeContextMenu}
             >
               <Controls style={{ right: '10px', bottom: 'auto', left: 'auto' }} />
               <SaveRestoreControls rfInstance={reactFlowInstance} setElements={setElements} />

@@ -32,4 +32,10 @@ export const SidebarData = [
         icon: <AiIcons.AiOutlineRadiusSetting />,
         cName: 'nav-text'
     },
+    {
+        title: 'VSM Flow Playground',
+        path: '/flow5',
+        icon: <AiIcons.AiFillPlaySquare />,
+        cName: 'nav-text'
+    },
 ]

@@ -23,14 +23,14 @@ const getId = () => `vsm_node_${id++}`;
 const VSMPlayground = () => {
   // Shared States
   const [elements, setElements] = useState(initialElements);
-  const [selectedNode, setSelectedNode] = useState(null);
+  //const [selectedNode, setSelectedNode] = useState(null);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   // Edge States
   const [selectedEdgeType, setSelectedEdgeType] = useState({ value: 'step', label: 'Step' })
   const [selectedArrowType, setSelectedArrowType] = useState({ value: 'arrowclosed', label: 'Arrow Closed' })
-  const [animateArrow, setAnimeteArrowChecked] = React.useState(false);
+  const [animateArrow, setAnimeteArrow] = React.useState(false);
   const [arrowLabel, setArrowLabel] = useState('');
   const [nodeName, setNodeName] = useState('');
   const [currentEdge, setCurrentEdge] = useState();
@@ -56,7 +56,7 @@ const VSMPlayground = () => {
     setElements((els) => removeElements(elementsToRemove, els));
 
     /* TODO[NMB]: Make this a Context Panel functionality */
-  const handleArrowLabelChange = (e) => {
+  /*const handleArrowLabelChange = (e) => {
     setArrowLabel(e.target.value)
   }
 
@@ -70,7 +70,7 @@ const VSMPlayground = () => {
 
   const handleArrowTypeChange = (selectedOption) => {
     setSelectedArrowType(selectedOption);
-  }
+  }*/
   /* ----------- END ------------ */
 
   // Edge Conections events handlers
@@ -78,6 +78,11 @@ const VSMPlayground = () => {
     setElements((els) => updateEdge(oldEdge, newConnection, els));
 
   const onConnect = (params) => setElements((els) => {
+    //to make the build work, delete after upgrading
+    setSelectedEdgeType(selectedEdgeType.value)
+    setSelectedArrowType(selectedArrowType.value)
+    setAnimeteArrow(false)
+    setArrowLabel('')
     const edge = {
       ...params,
       type: selectedEdgeType.value,
@@ -99,7 +104,7 @@ const VSMPlayground = () => {
 
   const handleMouseEnterToContextMenu = useCallback(() => {
     setMouseEnterNodeContextMenu(true)
-  }, [mouseEnterNodeContextMenu, showNodeContextMenu]);
+  }, []);
 
   const handleMouseLeaveToContextMenu = useCallback(() => {
     if (mouseEnterNodeContextMenu) {
@@ -111,7 +116,7 @@ const VSMPlayground = () => {
 
   const onNodeContextMenu = (event, node) => {
     event.preventDefault();
-    setSelectedNode(node)
+    //setSelectedNode(node)
     setShowNodeContextMenu(true)
     setAnchorPoint({ x: event.pageX-1, y: event.pageY-8})
     setContextMenuCurrentNode(node)
@@ -142,13 +147,16 @@ const VSMPlayground = () => {
   useEffect(() => {
     setElements((els) =>
       els.map((el) => {
-        if (el.id === currentEdge.id) {
-          el.label = edgeUpdatedLabel;
+        console.log(currentEdge)
+        if (currentEdge) {
+          if (el.id === currentEdge.id) {
+            el.label = edgeUpdatedLabel;
+          }
         }
         return el;
       })
     );
-  }, [edgeUpdatedLabel, setElements]);
+  }, [edgeUpdatedLabel, setElements, currentEdge]);
 
   const addEdgeLabelInputEvents = (input) => {
     input.addEventListener('keypress', onEdgeLabelInputKeyPress)
@@ -249,7 +257,7 @@ const VSMPlayground = () => {
                 const node = selectedElements ? selectedElements[0] : null
                 if (node && node.data && node.data.label)
                   setNodeName(node.data.label)
-                setSelectedNode(node)
+                //setSelectedNode(node)
               }}
               onNodeContextMenu={onNodeContextMenu}
               onEdgeContextMenu={onEdgeContextMenu}

@@ -24,7 +24,7 @@ const NodeMenu = ({show, setShow, anchorPoint, setElements, node}) => {
         return el;
       })
     );
-  }, [fillColor, setElements]);
+  }, [fillColor, setElements, node]);
 
   useEffect(() => {
     setElements((els) =>
@@ -35,22 +35,22 @@ const NodeMenu = ({show, setShow, anchorPoint, setElements, node}) => {
         return el;
       })
     );
-  }, [borderColor, setElements]);
+  }, [borderColor, setElements, node]);
 
   useEffect(() => {
     setElements((els) =>
       els.map((el) => {
         if (el.id === node.id) {
-          if (nodeFormType == 'circle') {
+          if (nodeFormType === 'circle') {
             el.style = { ...el.style, borderRadius: "50px", width: "100px", minHeight: "100px", paddingTop: "40px" };
-          } else if (nodeFormType == 'rectangle') {
+          } else if (nodeFormType === 'rectangle') {
             el.style = { ...el.style, borderRadius: "3px", width: "150px", minHeight: "39px", paddingTop: "10px"};
           }
         }
         return el;
       })
     );
-  }, [setElements, nodeFormType]);
+  }, [setElements, nodeFormType, node]);
 
   const onBorderColorChange = (event) => {
     setBorderColor(event.target.value)

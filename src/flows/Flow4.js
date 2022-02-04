@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
-  Edge,
   addEdge,
   removeElements,
   updateEdge,
@@ -29,7 +28,7 @@ const DnDFlow = () => {
   const [selectedArrowType, setSelectedArrowType] = useState({ value: 'arrowclosed', label: 'Arrow Closed' })
   const [animateArrow, setAnimeteArrowChecked] = React.useState(false);
   const [arrowLabel, setArrowLabel] = useState('');
-  const [selectedNode, setSelectedNode] = useState(null);
+  //const [selectedNode, setSelectedNode] = useState(null);
   const [nodeName, setNodeName] = useState('');
   const [nodeBg, setNodeBg] = useState('#eee');
 
@@ -82,14 +81,8 @@ const DnDFlow = () => {
   };
 
   const [showNodeContextMenu, setShowNodeContextMenu] = useState(false);
-  const [isContextSubmenuOpen, setIsContextSubmenuOpen] = useState(false);
   const [contextMenuCurrentNode, setContextMenuCurrentNode] = useState();
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
-
-  const handleClickOutsideContextMenu = useCallback(() => {
-    const keepContextMenuOnScreen = showNodeContextMenu && isContextSubmenuOpen
-    (keepContextMenuOnScreen ? setShowNodeContextMenu(false) : null)
-  }, [showNodeContextMenu]);
 
   const onNodeContextMenu = (event, node) => {
     event.preventDefault();
@@ -187,7 +180,7 @@ const DnDFlow = () => {
                 const node = selectedElements ? selectedElements[0] : null
                 if (node && node.data && node.data.label)
                   setNodeName(node.data.label)
-                setSelectedNode(node)
+                //setSelectedNode(node)
               }}
               onNodeContextMenu={onNodeContextMenu}
               onEdgeContextMenu={onEdgeContextMenu}

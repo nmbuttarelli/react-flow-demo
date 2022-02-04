@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-import { removeElements } from 'react-flow-renderer'
 import { FaTrash } from "react-icons/fa";
-import { BsCircle, BsBoundingBoxCircles } from "react-icons/bs";
 import './ContextMenu.css';
 
 const PanelMenu = ({show, setShow, anchorPoint, elements, setElements, getId, nodeName, setNodeName, reactFlowWrapper, reactFlowInstance }) => {
